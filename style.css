@@ -1,4 +1,21 @@
 body {
     background-color: black;
     color: white;
+    font-family: Roboto;
+}
+
+#library {
+    align-items: center;
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    justify-content: center;
+    margin: auto;
+    margin-top: 1rem;
+    width: 60%;
+}
+
+.book {
+    border: solid white 2px;
+    font-size: 24px;
 }
