@@ -1,5 +1,5 @@
 // const baseUrl = "https://covers.openlibrary.org/b/isbn/"
-const myLibrary = [];
+const libraryDisplay = document.querySelector("#library");
 
 class Book {
     constructor(title, author, year) {
@@ -25,16 +25,35 @@ class Book {
     }
 }
 
-class ImportantBook extends Book {
-  constructor(title, author, year) {
-    super(title, author, year);
-  }
-}
+const library = (() => {
+  const books = [];
 
-function addBookToLibrary(book, library) {
-  library.push(book)
-}
+  const init = () => {
+    libraryDisplay.innerHTML = "";
+    for (let i in books) {
+      let currBook = createBookElement(books[i]);
+      libraryDisplay.append(currBook);
+    }
+  }
+  
+  const createBookElement = (book) => {
+    let div = document.createElement("div");
+    div.classList.add("book");
+    div.innerHTML = 
+    ` <h2>${book.title}</h2>
+      <h3>${book.author}</h3>
+      <p>${book.year}</p> `;
+    return div;
+  }
+
+  const addBook = (book) => {
+    books.push(book);
+  } 
+
+  return {init, addBook, books}
+
+})();
 
 //9780547928227
-let theHobbit = new ImportantBook("The Hobbit", "J.R.R Tolkien", 1936)
-addBookToLibrary(theHobbit, myLibrary);
+let theHobbit = new Book("The Hobbit", "J.R.R Tolkien", 1936)
+library.addBook(theHobbit);
